@@ -1,50 +1,32 @@
-import React from "react";
-//import bootstrap
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-
-import netflixLogo from "../../assets/Images/Netflix-logo.png";
-import { FaSearch } from "react-icons/fa";
-import { IoNotifications } from "react-icons/io5";
-import { MdAccountBox } from "react-icons/md";
-import { IoMdArrowDropdown } from "react-icons/io";
+import React, { useState, useEffect } from "react";
+import "../Header/header.css";
+import logo from "../../assets/Images/Netflix-logo.png"
 
 function Header() {
+  const [show, handleShow] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        handleShow(true);
+      } else handleShow(false);
+    });
+    return () => {
+      window.removeEventListener("scroll", handleShow);
+    };
+  }, []);
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">
-          <img src={netflixLogo} alt="netflix-logo" width="100" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#features">Netflix</Nav.Link>
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#tvshows">TVShows</Nav.Link>
-            <Nav.Link href="#movies">Movies</Nav.Link>
-            <Nav.Link href="#lstest">Latest</Nav.Link>
-            <Nav.Link href="#mylist">Mylist</Nav.Link>
-            <Nav.Link href="#browse">Browse By Languages</Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">
-              <FaSearch />
-            </Nav.Link>
-            <Nav.Link href="#deets">
-              <IoNotifications />
-            </Nav.Link>
-            <Nav.Link href="#deets">
-              <MdAccountBox />
-            </Nav.Link>
-            <Nav.Link href="#deets">
-              <IoMdArrowDropdown />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className={`nav ${show && "nav__black"} `}>
+      <img
+        className="nav__logo"
+        src={logo}
+        alt="Netflix logo"
+      />
+      <img
+        className="nav__avatar"
+        src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+        alt="Avatur logo"
+      />
+    </div>
   );
 }
 
