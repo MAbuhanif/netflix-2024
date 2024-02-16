@@ -7,7 +7,4 @@ body, html {
     background: #111;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
